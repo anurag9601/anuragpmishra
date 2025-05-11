@@ -6,7 +6,7 @@ import { IoLogoLinkedin, IoMail } from "react-icons/io5";
 
 const NameSocial = () => {
   return (
-    <div className="text-slate-200 pt-[70px] flex flex-col items-start font-app max-w-[380px] nameSocial-animation">
+    <div className="h-full w-full max-w-[380px] flex-1 text-slate-200 pt-[70px] flex flex-col items-start font-app nameSocial-animation ml-[0px] lg:ml-[10%]">
       <Image
         src="/images/my-image.png"
         alt="my-image"

@@ -1,8 +1,10 @@
 import React from "react";
+import Skills from "./AboutMeComponents/Skills";
+import Education from "./AboutMeComponents/Education";
 
 const AboutMe = () => {
   return (
-    <div className="text-zinc-50 pt-[70px] flex-1 pl-[10%] font-app aboutMe-animation">
+    <div className="h-full w-full text-zinc-50 pt-[70px] flex-1 font-app aboutMe-animation lg:overflow-y-auto lg:px-[10%]">
       <h1 className="text-3xl font-[700] text-zinc-50">About Me</h1>
       <p className="my-[20px] text-zinc-300">
         I'm Anurag Mishra, a Full Stack Developer with a strong foundation in
@@ -25,6 +27,8 @@ const AboutMe = () => {
         disciplined, engaged, and always ready to take on the next challenge.
         <br />
       </p>
+      <Skills />
+      <Education />
     </div>
   );
 };
