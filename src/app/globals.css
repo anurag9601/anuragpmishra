@@ -1,0 +1,56 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme {
+  --font-app: "Nunito", sans-serif;
+}
+
+.appNav-animation{
+  animation: slideTop .8s ease-out;
+}
+
+.nameSocial-animation{
+  animation: slideLeft .8s ease-out;
+}
+
+.aboutMe-animation{
+  animation: blink .8s linear;
+}
+
+@keyframes slideTop{
+  0%{
+    transform: translateY(-40px);
+    opacity: 0;
+  }
+  100%{
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
+@keyframes slideLeft{
+  0%{
+    transform: translateX(-80px);
+    opacity: 0;
+  }
+  100%{ 
+    transform: translateX(0px);
+    opacity: 1;
+  }
+}
+
+@keyframes blink{
+  0%{
+    opacity: 0;
+  }
+  100%{
+    opacity: 1;
+  }
+}
+
