@@ -20,7 +20,7 @@ const NameSocial: React.FC = () => {
   }
 
   return (
-    <div className="h-full w-full max-w-[380px] flex-1 text-slate-200 pt-[70px] flex flex-col items-start font-app nameSocial-animation pl-[0px] lg:pl-[10%]">
+    <div className="h-full w-full max-w-[500px] flex-1 text-slate-200 pt-[70px] flex flex-col items-start font-app nameSocial-animation pl-[0px] lg:pl-[10%]">
       <Image
         src="/images/my-image.png"
         alt="my-image"

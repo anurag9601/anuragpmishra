@@ -97,7 +97,7 @@ const Project = () => {
         {projects.map((project, index) => {
           return (
             <div
-              className="flex flex-col md:flex-row items-start gap-[20px] pl-[25px] border-l-[2px] border-l-gray-700 mb-[10px]"
+              className="flex flex-col xl:flex-row items-start gap-[20px] pl-[25px] border-l-[2px] border-l-gray-700 mb-[10px]"
               key={index}
             >
               <Image
