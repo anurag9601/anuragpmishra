@@ -1,10 +1,11 @@
 import React from "react";
 import Skills from "./AboutMeComponents/Skills";
 import Education from "./AboutMeComponents/Education";
+import Project from "./AboutMeComponents/Project";
 
 const AboutMe = () => {
   return (
-    <div className="h-full w-full text-zinc-50 pt-[70px] flex-1 font-app aboutMe-animation lg:overflow-y-auto lg:px-[10%]">
+    <div className="h-full w-full text-zinc-50 py-[70px] flex-1 font-app aboutMe-animation lg:overflow-y-auto lg:px-[10%]">
       <h1 className="text-3xl font-[700] text-zinc-50">About Me</h1>
       <p className="my-[20px] text-zinc-300">
         I'm Anurag Mishra, a Full Stack Developer with a strong foundation in
@@ -29,6 +30,7 @@ const AboutMe = () => {
       </p>
       <Skills />
       <Education />
+      <Project />
     </div>
   );
 };

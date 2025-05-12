@@ -4,7 +4,7 @@ import React from "react";
 const Education = () => {
   const education = [
     {
-      degree: "Masters of Computer Science",
+      degree: "Master of Computer Science",
       college: "Ramniranjan Jhunjhunwala College",
       years: "June 2023 - July 2025",
     },
@@ -20,7 +20,7 @@ const Education = () => {
       {education.map((edu, index) => {
         return (
           <div
-            className="flex items-center gap-[20px] pl-[30px] border-l-[2px] border-l-gray-700 mb-[10px]"
+            className="flex items-start gap-[20px] pl-[25px] border-l-[2px] border-l-gray-700 mb-[10px]"
             key={index}
           >
             <Image
@@ -31,11 +31,13 @@ const Education = () => {
               className="bg-zinc-50 p-[10px] rounded-full"
             />
             <div>
-              <h1 className="text-2xl font-[700] text-zinc-50 mb-[5px]">
+              <h1 className="text-lg md:text-2xl font-[700] text-zinc-50 mb-[5px]">
                 {edu.degree}
               </h1>
-              <h2 className="text-lg text-zinc-300">{edu.college}</h2>
-              <p className="text-lg text-zinc-400">{edu.years}</p>
+              <h2 className="text-sm md:text-lg text-zinc-300">
+                {edu.college}
+              </h2>
+              <p className="text-sm md:text-lg text-zinc-400">{edu.years}</p>
             </div>
           </div>
         );

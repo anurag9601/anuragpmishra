@@ -18,7 +18,7 @@ const Skills = () => {
             {languages.map((language, index) => {
               return (
                 <div
-                  className="py-[5px] px-[15px] rounded-[30px] bg-blue-950 text-blue-400 w-fit text-[12px] font-[600]"
+                  className="py-[5px] px-[15px] rounded-[30px] bg-blue-950 text-blue-400 w-fit text-[14px] font-[600]"
                   key={`${language} - ${index}`}
                 >
                   {language}
@@ -33,7 +33,7 @@ const Skills = () => {
             {frameworks.map((framework, index) => {
               return (
                 <div
-                  className="py-[5px] px-[15px] rounded-[30px] bg-green-950 text-green-600 w-fit text-[12px] font-[600]"
+                  className="py-[5px] px-[15px] rounded-[30px] bg-green-950 text-green-600 w-fit text-[14px] font-[600]"
                   key={`${framework} - ${index}`}
                 >
                   {framework}
@@ -48,7 +48,7 @@ const Skills = () => {
             {backends.map((backend, index) => {
               return (
                 <div
-                  className="py-[5px] px-[15px] rounded-[30px] bg-purple-950 text-purple-400 w-fit text-[12px] font-[600]"
+                  className="py-[5px] px-[15px] rounded-[30px] bg-purple-950 text-purple-400 w-fit text-[14px] font-[600]"
                   key={`${backend} - ${index}`}
                 >
                   {backend}
@@ -63,7 +63,7 @@ const Skills = () => {
             {databases.map((database, index) => {
               return (
                 <div
-                  className="py-[5px] px-[15px] rounded-[30px] bg-red-950 text-red-400 w-fit text-[12px] font-[600]"
+                  className="py-[5px] px-[15px] rounded-[30px] bg-red-950 text-red-400 w-fit text-[14px] font-[600]"
                   key={`${database} - ${index}`}
                 >
                   {database}
@@ -78,7 +78,7 @@ const Skills = () => {
             {aiSkills.map((ai, index) => {
               return (
                 <div
-                  className="py-[5px] px-[15px] rounded-[30px] bg-teal-950 text-teal-500 w-fit text-[12px] font-[600]"
+                  className="py-[5px] px-[15px] rounded-[30px] bg-teal-950 text-teal-500 w-fit text-[14px] font-[600]"
                   key={`${ai} - ${index}`}
                 >
                   {ai}
@@ -93,7 +93,7 @@ const Skills = () => {
             {practices.map((practice, index) => {
               return (
                 <div
-                  className="py-[5px] px-[15px] rounded-[30px] bg-yellow-950 text-yellow-600 w-fit text-[12px] font-[600]"
+                  className="py-[5px] px-[15px] rounded-[30px] bg-yellow-950 text-yellow-600 w-fit text-[14px] font-[600]"
                   key={`${practice} - ${index}`}
                 >
                   {practice}
