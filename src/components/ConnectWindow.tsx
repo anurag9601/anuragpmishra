@@ -30,18 +30,20 @@ const ConnectWindow: React.FC = () => {
   }, []);
 
   return (
-    <div className="fixed flex-1 h-full w-full bg-[rgba(0,0,0,.8)] flex items-center justify-center font-app z-[999] overflow-y-auto">
-      <div
-        className="px-[5%] md:px-[0%] md:w-[80%] lg:w-[60%] w-full flex"
-        ref={contentContainerRef}
-      >
-        {!selectedTab ? (
-          <Options />
-        ) : connectionDetailsWindowOpen === false ? (
-          <UserInfoForm />
-        ) : (
-          <DetailsForm />
-        )}
+    <div className="fixed inset-0 z-[999] bg-[rgba(0,0,0,.8)] overflow-y-auto">
+      <div className="min-h-screen flex items-center justify-center font-app px-[5%] md:px-[0%]">
+        <div
+          className="md:w-[80%] lg:w-[60%] w-full flex zoomIn-animation"
+          ref={contentContainerRef}
+        >
+          {!selectedTab ? (
+            <Options />
+          ) : connectionDetailsWindowOpen === false ? (
+            <UserInfoForm />
+          ) : (
+            <DetailsForm />
+          )}
+        </div>
       </div>
     </div>
   );
