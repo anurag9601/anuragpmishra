@@ -16,7 +16,7 @@ const GuestBook = () => {
         </h1>
       </div>
       <SendMessage />
-      <Messages />
+      {/* <Messages /> */}
     </div>
   );
 };

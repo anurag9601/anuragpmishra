@@ -4,6 +4,8 @@ import "./globals.css";
 import ThemeContextProvider from "@/context/ThemeContext";
 import AppNav from "@/components/AppNav";
 import ConnectionContextProvider from "@/context/ConnectionContext";
+import { SessionProvider } from "next-auth/react";
+import AskAIContextProvider from "@/context/AskAIContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -35,12 +37,16 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ConnectionContextProvider>
-          <ThemeContextProvider>
-            <AppNav />
-            {children}
-          </ThemeContextProvider>
-        </ConnectionContextProvider>
+        <SessionProvider>
+          <AskAIContextProvider>
+            <ConnectionContextProvider>
+              <ThemeContextProvider>
+                <AppNav />
+                {children}
+              </ThemeContextProvider>
+            </ConnectionContextProvider>
+          </AskAIContextProvider>
+        </SessionProvider>
       </body>
     </html>
   );

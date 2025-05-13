@@ -27,6 +27,10 @@
   animation: zoomIn .3s linear;
 }
 
+.loading-animation{
+  animation: auth-loading 1s linear infinite;
+}
+
 @keyframes slideTop{
   0%{
     transform: translateY(-40px);
@@ -70,6 +74,18 @@
   100%{
     transform: scale(1);
     opacity: 1;
+  }
+}
+
+@keyframes auth-loading{
+  0%{
+    opacity: 0;
+  }
+  50%{
+    opacity: 1;
+  }
+  100%{
+    opacity: 0;
   }
 }
 

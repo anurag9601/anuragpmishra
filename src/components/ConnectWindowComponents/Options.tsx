@@ -22,7 +22,7 @@ const Options = () => {
       </div>
       <div className="flex flex-col lg:flex-row justify-between gap-[10px]">
         <div
-          className="p-[30px] border-[2px] border-gray-500 rounded-lg cursor-pointer flex-1 flex flex-col gap-[10px] hover:border-blue-400 hover:bg-stone-900"
+          className="p-[30px] border-[2px] border-zinc-500 rounded-lg cursor-pointer flex-1 flex flex-col gap-[10px] hover:border-blue-400 hover:bg-neutral-900"
           onClick={() => setSelectedTab("inquiry")}
         >
           <div className="flex items-center gap-[20px] text-zinc-200 text-xl font-[600]">
@@ -34,7 +34,7 @@ const Options = () => {
           </p>
         </div>
         <div
-          className="p-[30px] border-[2px] border-gray-500 rounded-lg cursor-pointer flex-1 flex flex-col gap-[10px] hover:border-blue-400 hover:bg-stone-900"
+          className="p-[30px] border-[2px] border-gray-500 rounded-lg cursor-pointer flex-1 flex flex-col gap-[10px] hover:border-blue-400 hover:bg-neutral-900"
           onClick={() => setSelectedTab("collaboration")}
         >
           <div className="flex items-center gap-[20px] text-zinc-200 text-xl font-[600]">
