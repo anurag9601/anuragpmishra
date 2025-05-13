@@ -20,7 +20,7 @@
 }
 
 .aboutMe-animation{
-  animation: blink .8s linear;
+  animation: blinkAndTopSlice .8s linear;
 }
 
 .zoomIn-animation{
@@ -29,6 +29,14 @@
 
 .loading-animation{
   animation: auth-loading 1s linear infinite;
+}
+
+.note-blink{
+  animation: blink .8s linear;
+}
+
+.indication-tag-animation{
+  animation: frizz 1s ease-in-out infinite;
 }
 
 @keyframes slideTop{
@@ -53,7 +61,7 @@
   }
 }
 
-@keyframes blink{
+@keyframes blinkAndTopSlice{
   0%{
     transform: translateY(30px);
     overflow: hidden;
@@ -88,6 +96,40 @@
     opacity: 0;
   }
 }
+
+@keyframes blink{
+  0%{
+    transform: scale(.8);
+    opacity: 0;
+  }
+  100%{
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes frizz {
+  0% {
+    transform: scale(1) rotate(0deg) translateY(0);
+  }
+  15% {
+    transform: scale(1.05) rotate(1deg) translateY(-1px);
+  }
+  30% {
+    transform: scale(1.03) rotate(-1deg) translateY(0.5px);
+  }
+  50% {
+    transform: scale(1.04) rotate(0.5deg) translateY(-0.5px);
+  }
+  70% {
+    transform: scale(1.02) rotate(-0.5deg) translateY(0.5px);
+  }
+  100% {
+    transform: scale(1) rotate(0deg) translateY(0);
+  }
+}
+
+
 
 ::-webkit-scrollbar {
   width: 8px;

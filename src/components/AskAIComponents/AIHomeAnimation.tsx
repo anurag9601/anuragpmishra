@@ -3,11 +3,13 @@ import { AskAIContext } from "@/context/AskAIContext";
 import React, { useContext, useEffect, useRef, useState } from "react";
 
 const AIHomeAnimation = () => {
-  const { speaking, setSpeaking } = useContext(AskAIContext);
+  const { setSpeaking } = useContext(AskAIContext);
 
   const mainContainerRef = useRef<HTMLDivElement | null>(null);
 
   const iframeContanerRef = useRef<HTMLDivElement | null>(null);
+
+  const [animationStart, setAnimationStart] = useState<boolean>(false);
 
   const [mouseCordinate, setMouseCordinate] = useState<{
     [key: string]: number;
@@ -55,9 +57,7 @@ const AIHomeAnimation = () => {
   }, []);
 
   function handleUserClick() {
-    if (speaking === null) {
-      setSpeaking("ai");
-    }
+    setSpeaking("user");
   }
 
   return (
@@ -66,6 +66,11 @@ const AIHomeAnimation = () => {
       onClick={handleUserClick}
       ref={mainContainerRef}
     >
+      <h2
+        className={`h-[30px] w-[120px] bg-zinc-100 text-zinc-950 flex items-center justify-center rounded-lg text-[14px] font-bold fixed top-[120px] left-[50%] translate-[-50%] sm:invisible indication-tag-animation`}
+      >
+        Tap to Proceed 
+      </h2>
       <h2
         className={`h-[30px] w-[120px] bg-zinc-100 text-zinc-950 flex items-center justify-center rounded-lg text-[14px] font-bold fixed transition-opacity duration-200 ${
           showMessage ? "opacity-100" : "opacity-0"
