@@ -42,6 +42,14 @@
   animation: settingLeftSlide .5s linear;
 }
 
+.loading-spin{
+  animation: spin .5s linear infinite;
+}
+
+.notification-animation{
+  animation: slideDown .8s linear;
+}
+
 @keyframes slideTop{
   0%{
     transform: translateY(-40px);
@@ -140,6 +148,30 @@
   100%{ 
     transform: translateX(0px);
     opacity: 1;
+  }
+}
+
+@keyframes spin{
+  0%{ 
+    transform: rotate(0deg);
+  }
+  100%{ 
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes slideDown{
+  0%{ 
+    opacity: 0;
+    transform: translateY(100px);
+  }
+  50%{ 
+    opacity: .5;
+    transform: translateY(-20px);
+  }
+  100%{ 
+    opacity: 1;
+    transform: translateY(0px);
   }
 }
 

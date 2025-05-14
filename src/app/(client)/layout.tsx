@@ -6,6 +6,8 @@ import AppNav from "@/components/AppNav";
 import ConnectionContextProvider from "@/context/ConnectionContext";
 import { SessionProvider } from "next-auth/react";
 import AskAIContextProvider from "@/context/AskAIContext";
+import AppContextProvider from "@/context/appContext";
+import Notification from "@/components/Notification";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -38,14 +40,17 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <SessionProvider>
-          <AskAIContextProvider>
-            <ConnectionContextProvider>
-              <ThemeContextProvider>
-                <AppNav />
-                {children}
-              </ThemeContextProvider>
-            </ConnectionContextProvider>
-          </AskAIContextProvider>
+          <AppContextProvider>
+            <AskAIContextProvider>
+              <ConnectionContextProvider>
+                <ThemeContextProvider>
+                  <AppNav />
+                  {children}
+                  <Notification />
+                </ThemeContextProvider>
+              </ConnectionContextProvider>
+            </AskAIContextProvider>
+          </AppContextProvider>
         </SessionProvider>
       </body>
     </html>

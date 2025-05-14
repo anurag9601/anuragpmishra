@@ -74,8 +74,8 @@ const AIRes = () => {
   useEffect(() => {
     if (AIRes && hasSpokenRef.current === false) {
       const chunks = splitTextIntoChunks(AIRes);
+      hasSpokenRef.current = true;
       speakChunks(chunks, 0, muted, () => {
-        hasSpokenRef.current = true;
         setAIRes(null);
         setSpeaking("user");
       });

@@ -1,6 +1,6 @@
 "use client";
 import { ConnectionContext } from "@/context/ConnectionContext";
-import React, { ChangeEvent, useContext } from "react";
+import React, { ChangeEvent, useContext, useState } from "react";
 import { FaQuestion } from "react-icons/fa";
 import { FaIndianRupeeSign } from "react-icons/fa6";
 import { FiUsers } from "react-icons/fi";
@@ -11,6 +11,7 @@ import { RxCross2 } from "react-icons/rx";
 import { SlCalender } from "react-icons/sl";
 import { z } from "zod";
 import ProjectDetailsUploadForm from "./ProjectDetailsUploadForm";
+import { AppContext } from "@/context/appContext";
 
 const DetailsForm = () => {
   const {
@@ -22,6 +23,10 @@ const DetailsForm = () => {
     projectDetailUploadWindowOpen,
     setProjectDetailUploadWindowOpen,
   } = useContext(ConnectionContext);
+
+  const { setNotification } = useContext(AppContext);
+
+  const [loading, setLoading] = useState<boolean>(false);
 
   const handleSelectionInputChange = (
     e: ChangeEvent<HTMLSelectElement | HTMLInputElement | HTMLTextAreaElement>,
@@ -44,7 +49,9 @@ const DetailsForm = () => {
     });
   };
 
-  function handleSendQuestion() {
+  async function handleSendQuestion() {
+    if (loading) return;
+
     const zodValidCheckOnSendQuestionData = z.object({
       questionCategory: z.string(),
       urgencyLevel: z.string(),
@@ -62,7 +69,34 @@ const DetailsForm = () => {
     const result = zodValidCheckOnSendQuestionData.safeParse(data);
 
     if (result.success === true) {
+      setLoading(true);
+      const sendData = {
+        userName: connectUserAllInfo.userName,
+        email: connectUserAllInfo.email,
+        questionCategory: connectUserAllInfo.questionCategory,
+        urgencyLevel: connectUserAllInfo.urgencyLevel,
+        preferredResponseTime: connectUserAllInfo.preferredResponseTime,
+        yourQuestion: connectUserAllInfo.yourQuestion,
+      };
+
+      const request = await fetch("/api/mail/question", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(sendData),
+      });
+
+      const response = await request.json();
+
+      if (response.success === true) {
+        setNotification(`🎉 Your message has been sent!
+        Thank you for reaching out 💌
+        I’ve received your question and will get back to you as soon as possible.
+        In the meantime, grab a coffee ☕ and relax I’ve got this! 😊`);
+      } else if (response.error) {
+        setNotification(response.error);
+      }
       setConnectWindowOpen(false);
+      setLoading(false);
     }
   }
 
@@ -250,10 +284,16 @@ const DetailsForm = () => {
               </button>
               {selectedTab === "inquiry" ? (
                 <button
-                  className="bg-blue-600 text-zinc-50 px-[20px] py-[7px] rounded-lg text-md cursor-pointer hover:bg-blue-700"
+                  className={`h-[37px] w-[150px] bg-blue-600 text-zinc-50 px-[20px] py-[7px] rounded-lg text-md ${
+                    loading == false && "cursor-pointer"
+                  } hover:bg-blue-700 flex items-center justify-center`}
                   onClick={handleSendQuestion}
                 >
-                  Send Question
+                  {loading === false ? (
+                    "Send Question"
+                  ) : (
+                    <div className="border-[3px] h-[25px] w-[25px] rounded-full border-t-blue-600 loading-spin"></div>
+                  )}
                 </button>
               ) : (
                 <button
