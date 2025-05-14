@@ -1,6 +1,7 @@
 import { AskAIContext } from "@/context/AskAIContext";
 import { getResponseFromGemini } from "@/services/llm";
 import React, { useContext, useEffect, useRef, useState } from "react";
+import { voiceData } from "../../../public/data/voiceData";
 
 const UserQuery = () => {
   const {
@@ -9,6 +10,7 @@ const UserQuery = () => {
     setUserSpeaking,
     setAIRes,
     selectedLanguage,
+    selectedVoice,
   } = useContext(AskAIContext);
 
   const mainContainerRef = useRef<HTMLDivElement | null>(null);
@@ -57,7 +59,10 @@ const UserQuery = () => {
               const transcript = event.results[0][0].transcript;
               spoken = true;
               if (transcript.length > 0) {
-                const response = await getResponseFromGemini(transcript);
+                const response = await getResponseFromGemini(
+                  transcript,
+                  voiceData[selectedVoice.name].split(" ")[0]
+                );
                 if (response) {
                   setAIRes(response);
                   setSpeaking("ai");
@@ -113,7 +118,10 @@ const UserQuery = () => {
                   const transcript = event.results[0][0].transcript;
                   spoken = true;
                   if (transcript.length > 0) {
-                    const response = await getResponseFromGemini(transcript);
+                    const response = await getResponseFromGemini(
+                      transcript,
+                      voiceData[selectedVoice.name].split(" ")[0]
+                    );
                     if (response) {
                       setAIRes(response);
                       setSpeaking("ai");

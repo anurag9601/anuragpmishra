@@ -106,6 +106,7 @@ const Project = () => {
                 height={100}
                 width={250}
                 className="rounded-lg object-center object-cover cursor-pointer"
+                loading="lazy"
               />
               <div className="flex flex-col gap-[10px]">
                 <h1 className="text-xl md:text-2xl font-[700] text-zinc-50 mb-[5px]">

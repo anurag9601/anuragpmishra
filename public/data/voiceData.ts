@@ -1,4 +1,4 @@
-{
+export const voiceData: { [key: string]: string } = {
     "Microsoft George - English (United Kingdom)": "Kian",
     "Microsoft Hazel - English (United Kingdom)": "Inaya",
     "Microsoft Susan - English (United Kingdom)": "Saanvi",

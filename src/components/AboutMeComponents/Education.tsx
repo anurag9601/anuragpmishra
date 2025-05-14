@@ -29,6 +29,7 @@ const Education = () => {
               height={100}  
               width={100}
               className="h-[70px] w-[70px] md:h-[100px] md:w-[100px] bg-zinc-50 p-[10px] rounded-full"
+              loading="lazy"
             />
             <div>
               <h1 className="text-[16px] md:text-2xl font-[700] text-zinc-50 mb-[5px]">

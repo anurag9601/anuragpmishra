@@ -37,7 +37,7 @@ export const AskAIContext = createContext<AskAIContextDataType>({
   AIRes: null,
   setAIRes: () => {},
   selectedVoice: {
-    name: "",
+    name: "Google हिन्दी",
     index: 0,
   },
   setSelectedVoice: () => {},
@@ -56,7 +56,7 @@ function AskAIContextProvider({ children }: { children: ReactNode }) {
     name: string;
     index: number;
   }>({
-    name: "",
+    name: "Google हिन्दी",
     index: 12,
   });
 

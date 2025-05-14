@@ -3,7 +3,7 @@
 import { AskAIContext } from "@/context/AskAIContext";
 import Image from "next/image";
 import React, { ChangeEvent, useContext, useState } from "react";
-import voiceData from "../../../public/data/voiceData.json";
+import { voiceData } from "../../../public/data/voiceData";
 
 const VoiceSetting = () => {
   const {
@@ -14,8 +14,6 @@ const VoiceSetting = () => {
   } = useContext(AskAIContext);
 
   const voices = window.speechSynthesis.getVoices();
-
-  const voiceObject: { [key: string]: string } = voiceData;
 
   const [settingsOpen, setSettingsOpen] = useState<boolean>(false);
 
@@ -33,7 +31,9 @@ const VoiceSetting = () => {
     const voice = voices[selectedIndex];
 
     const message = `Hey I am ${
-      voiceObject[selectedVoiceURI] ?? selectedVoiceURI
+      voiceData[selectedVoiceURI]
+        ? voiceData[selectedVoiceURI].split(" ")[0]
+        : selectedVoiceURI
     }`;
 
     const speech = new SpeechSynthesisUtterance();
@@ -58,7 +58,7 @@ const VoiceSetting = () => {
           <div className="flex flex-col gap-[5px]">
             <p className="text-[10px] font-[600] ml-[5px]">AI Voice</p>
             <select
-              value={voiceObject[selectedVoice.index]}
+              value={voiceData[selectedVoice.index]}
               onChange={(e) => handleSelectVoiceOnChange(e)}
               className="h-[25px] w-[70px] bg-zinc-800 rounded-lg text-[14px] text-zinc-50 outline-none border-[1.5px] border-zinc-500 focus:border-blue-500 cursor-pointer"
             >
@@ -69,7 +69,7 @@ const VoiceSetting = () => {
                     key={i}
                     className="max-w-[70px] w-full h-[25px]"
                   >
-                    {voiceObject[voice.voiceURI] ?? voice.name}
+                    {voiceData[voice.voiceURI] ?? voice.name}
                   </option>
                 );
               })}

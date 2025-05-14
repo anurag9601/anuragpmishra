@@ -52,7 +52,7 @@ const AIRes = () => {
     setMuted((prev) => !prev);
   }
 
-  function splitTextIntoChunks(text: string, maxLength: number = 200) {
+  function splitTextIntoChunks(text: string, maxLength: number = 100) {
     let words: string[] = text.split(/[.!?।,\\]+/);
 
     const chunks: string[] = [];
