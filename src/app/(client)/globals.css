@@ -38,6 +38,9 @@
 .indication-tag-animation{
   animation: frizz 1s ease-in-out infinite;
 }
+.setting-left-slide{
+  animation: settingLeftSlide .5s linear;
+}
 
 @keyframes slideTop{
   0%{
@@ -113,7 +116,7 @@
     transform: scale(1) rotate(0deg) translateY(0);
   }
   15% {
-    transform: scale(1.05) rotate(1deg) translateY(-1px);
+    transform: scale(1.05) rotate(1deg) translateY(-2px);
   }
   30% {
     transform: scale(1.03) rotate(-1deg) translateY(0.5px);
@@ -126,6 +129,17 @@
   }
   100% {
     transform: scale(1) rotate(0deg) translateY(0);
+  }
+}
+
+@keyframes settingLeftSlide {
+  0%{ 
+    transform: translateX(-50px);
+    opacity: 0;
+  }
+  100%{ 
+    transform: translateX(0px);
+    opacity: 1;
   }
 }
 

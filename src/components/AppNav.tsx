@@ -8,7 +8,7 @@ const AppNav = () => {
   const router = useRouter();
 
   return (
-    <div className="fixed top-[5px] left-[50%] w-[90%] md:w-[80%] md:w-fit h-[50px] bg-zinc-900 border-[1px] border-zinc-800 p-[20px] rounded-lg flex items-center justify-evenly gap-[10px] md:gap-[30px] text-slate-200 font-app translate-x-[-50%] text-sm appNav-animation font-[600] z-[999]">
+    <div className="fixed top-[5px] left-[50%] w-[90%] md:w-[80%] md:w-fit h-[50px] bg-zinc-900 border-[1px] border-zinc-800 px-[5px] md:px-[20px] :py-[20px] rounded-lg flex items-center justify-evenly gap-[10px] md:gap-[30px] text-slate-200 font-app translate-x-[-50%] text-[13px] md:text-[14px] appNav-animation font-[600] z-[999]">
       <div
         className="flex items-center justify-center gap-[10px] cursor-pointer"
         onClick={() => router.push("/")}

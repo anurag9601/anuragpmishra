@@ -3,8 +3,13 @@ import { getResponseFromGemini } from "@/services/llm";
 import React, { useContext, useEffect, useRef, useState } from "react";
 
 const UserQuery = () => {
-  const { setSpeaking, userSpeaking, setUserSpeaking, setAIRes } =
-    useContext(AskAIContext);
+  const {
+    setSpeaking,
+    userSpeaking,
+    setUserSpeaking,
+    setAIRes,
+    selectedLanguage,
+  } = useContext(AskAIContext);
 
   const mainContainerRef = useRef<HTMLDivElement | null>(null);
 
@@ -21,6 +26,7 @@ const UserQuery = () => {
 
   function handleUserToSpeak() {
     if (userSpeaking === false) {
+      let spoken = false;
       navigator.permissions
         .query({ name: "microphone" as PermissionName })
         .then((permissionStatus) => {
@@ -39,21 +45,34 @@ const UserQuery = () => {
 
             const recognition = new SpeechRecognition();
             recognition.continuous = false;
+            recognition.lang = selectedLanguage;
             recognition.interimResults = false;
             recognition.maxAlternatives = 1;
 
             recognition.onstart = function () {
-              console.log("Recognition started");
+              spoken = false;
             };
 
             recognition.onresult = async function (event: any) {
               const transcript = event.results[0][0].transcript;
-              const response = await getResponseFromGemini(transcript);
-              if (response) {
-                setAIRes(response);
+              spoken = true;
+              if (transcript.length > 0) {
+                const response = await getResponseFromGemini(transcript);
+                if (response) {
+                  setAIRes(response);
+                  setSpeaking("ai");
+                  setUserSpeaking(false);
+                } else {
+                  setUserSpeaking(false);
+                }
               }
-              setSpeaking("ai");
-              setUserSpeaking(false);
+            };
+
+            recognition.onend = function () {
+              if (!spoken) {
+                alert("😶 It seems you didn't say anything. Please try again.");
+                setUserSpeaking(false);
+              }
             };
 
             recognition.onerror = function (event: any) {
@@ -82,21 +101,36 @@ const UserQuery = () => {
 
                 const recognition = new SpeechRecognition();
                 recognition.continuous = false;
+                recognition.lang = selectedLanguage;
                 recognition.interimResults = false;
                 recognition.maxAlternatives = 1;
 
                 recognition.onstart = function () {
-                  console.log("Recognition started");
+                  spoken = false;
                 };
 
                 recognition.onresult = async function (event: any) {
                   const transcript = event.results[0][0].transcript;
-                  const response = await getResponseFromGemini(transcript);
-                  if (response) {
-                    setAIRes(response);
+                  spoken = true;
+                  if (transcript.length > 0) {
+                    const response = await getResponseFromGemini(transcript);
+                    if (response) {
+                      setAIRes(response);
+                      setSpeaking("ai");
+                      setUserSpeaking(false);
+                    } else {
+                      setUserSpeaking(false);
+                    }
                   }
-                  setSpeaking("ai");
-                  setUserSpeaking(false);
+                };
+
+                recognition.onend = function () {
+                  if (!spoken) {
+                    alert(
+                      "😶 It seems you didn't say anything. Please try again."
+                    );
+                    setUserSpeaking(false);
+                  }
                 };
 
                 recognition.onerror = function (event: any) {
@@ -187,10 +221,10 @@ const UserQuery = () => {
         </h2>
       )}
 
-      <div className="h-[80%] w-[80%] relative" ref={iframeContanerRef}>
+      <div className="h-[90%] w-[90%] relative" ref={iframeContanerRef}>
         {userSpeaking === true ? (
           <iframe
-            src="https://lottie.host/embed/081227ed-2643-4cd5-80bc-4cd8c80d3a8f/2NMhcicCzA.lottie"
+            src="https://lottie.host/embed/88eb4a2e-1ca1-40d5-815e-44f471bceafe/hwzFpBC9wk.lottie"
             className="h-full w-full"
             style={{
               pointerEvents: "none",
@@ -198,7 +232,7 @@ const UserQuery = () => {
           ></iframe>
         ) : (
           <iframe
-            src="https://lottie.host/embed/88eb4a2e-1ca1-40d5-815e-44f471bceafe/hwzFpBC9wk.lottie"
+            src="https://lottie.host/embed/19176446-ead2-4c00-ade0-fc7a61589879/LCGiFeo6mi.lottie"
             className="h-full w-full"
             style={{
               pointerEvents: "none",

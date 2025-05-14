@@ -15,6 +15,18 @@ type AskAIContextDataType = {
   setUserSpeaking: Dispatch<SetStateAction<boolean>>;
   AIRes: string | null;
   setAIRes: Dispatch<SetStateAction<string | null>>;
+  selectedVoice: {
+    name: string;
+    index: number;
+  };
+  setSelectedVoice: Dispatch<
+    SetStateAction<{
+      name: string;
+      index: number;
+    }>
+  >;
+  selectedLanguage: string;
+  setSelectedLanguage: Dispatch<SetStateAction<string>>;
 };
 
 export const AskAIContext = createContext<AskAIContextDataType>({
@@ -24,6 +36,13 @@ export const AskAIContext = createContext<AskAIContextDataType>({
   setUserSpeaking: () => {},
   AIRes: null,
   setAIRes: () => {},
+  selectedVoice: {
+    name: "",
+    index: 0,
+  },
+  setSelectedVoice: () => {},
+  selectedLanguage: "en-IN",
+  setSelectedLanguage: () => {},
 });
 
 function AskAIContextProvider({ children }: { children: ReactNode }) {
@@ -33,6 +52,16 @@ function AskAIContextProvider({ children }: { children: ReactNode }) {
 
   const [AIRes, setAIRes] = useState<string | null>(null);
 
+  const [selectedVoice, setSelectedVoice] = useState<{
+    name: string;
+    index: number;
+  }>({
+    name: "",
+    index: 12,
+  });
+
+  const [selectedLanguage, setSelectedLanguage] = useState<string>("en-IN");
+
   const values = {
     speaking,
     setSpeaking,
@@ -40,6 +69,10 @@ function AskAIContextProvider({ children }: { children: ReactNode }) {
     setUserSpeaking,
     AIRes,
     setAIRes,
+    selectedVoice,
+    setSelectedVoice,
+    selectedLanguage,
+    setSelectedLanguage,
   };
 
   return (

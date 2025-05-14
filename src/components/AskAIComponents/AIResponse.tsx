@@ -2,32 +2,44 @@ import { AskAIContext } from "@/context/AskAIContext";
 import React, { useContext, useEffect, useRef, useState } from "react";
 
 const AIRes = () => {
-  const { setSpeaking, AIRes, setAIRes } = useContext(AskAIContext);
+  const { setSpeaking, AIRes, setAIRes, selectedVoice, selectedLanguage } =
+    useContext(AskAIContext);
 
   const hasSpokenRef = useRef<boolean>(false);
 
   const [muted, setMuted] = useState<boolean>(false);
 
-  function speakAI(
-    response: string,
+  function speakChunks(
+    chunks: string[],
+    index: number = 0,
     muted: boolean = false,
     onComplete?: () => void
   ) {
-    const speech = new SpeechSynthesisUtterance();
-    speech.text = response;
-    speech.volume = muted ? 0 : 1;
+    if (index >= chunks.length) {
+      onComplete?.();
+      return;
+    }
 
-    speech.onend = () => {
-      if (onComplete) onComplete();
+    let voices = window.speechSynthesis.getVoices();
+    if (!voices.length) {
+      window.speechSynthesis.onvoiceschanged = () => {
+        voices = window.speechSynthesis.getVoices();
+      };
+    }
+
+    const utterance = new SpeechSynthesisUtterance(chunks[index]);
+    utterance.voice = voices[selectedVoice.index];
+    utterance.volume = muted ? 0 : 1;
+
+    utterance.onend = () => speakChunks(chunks, index + 1, muted, onComplete);
+    utterance.onerror = (e) => {
+      console.error("Speech error:", e.error);
     };
 
-    speech.onerror = (event) => {
-      // alert("OOps!! Something went wrong. 😶‍🌫️");
-      console.error("Speech error:", event.error);
-    };
-
-    window.speechSynthesis.cancel();
-    window.speechSynthesis.speak(speech);
+    if (window.speechSynthesis.speaking || window.speechSynthesis.pending) {
+      window.speechSynthesis.cancel();
+    }
+    window.speechSynthesis.speak(utterance);
   }
 
   function handleCancelAI() {
@@ -40,9 +52,29 @@ const AIRes = () => {
     setMuted((prev) => !prev);
   }
 
+  function splitTextIntoChunks(text: string, maxLength: number = 200) {
+    let words: string[] = text.split(/[.!?।,\\]+/);
+
+    const chunks: string[] = [];
+
+    let currentChunk = "";
+    for (const word of words) {
+      if ((currentChunk + `${word} `).length > maxLength) {
+        chunks.push(currentChunk);
+        currentChunk = `${word} `;
+      } else {
+        currentChunk += `${word} `;
+      }
+    }
+    if (currentChunk) chunks.push(currentChunk);
+
+    return chunks;
+  }
+
   useEffect(() => {
     if (AIRes && hasSpokenRef.current === false) {
-      speakAI(AIRes, muted, () => {
+      const chunks = splitTextIntoChunks(AIRes);
+      speakChunks(chunks, 0, muted, () => {
         hasSpokenRef.current = true;
         setAIRes(null);
         setSpeaking("user");
@@ -67,8 +99,8 @@ const AIRes = () => {
         </button>
       </div>
       <iframe
-        src="https://lottie.host/embed/d8bf3e97-6073-47a8-a48e-297bd24ecac1/MwwATZFpJ3.lottie"
-        className="h-[90%] w-[90%] cursor-pointer"
+        src="https://lottie.host/embed/51839934-3c4a-4e37-b4f0-fa46850a145e/OaVikc7wtn.lottie"
+        className="h-[90%] w-[90%]"
       ></iframe>
     </div>
   );

@@ -26,15 +26,15 @@ const Education = () => {
             <Image
               src="/images/college-logo.png"
               alt="college-logo"
-              height={100}
+              height={100}  
               width={100}
-              className="bg-zinc-50 p-[10px] rounded-full"
+              className="h-[70px] w-[70px] md:h-[100px] md:w-[100px] bg-zinc-50 p-[10px] rounded-full"
             />
             <div>
-              <h1 className="text-lg md:text-2xl font-[700] text-zinc-50 mb-[5px]">
+              <h1 className="text-[16px] md:text-2xl font-[700] text-zinc-50 mb-[5px]">
                 {edu.degree}
               </h1>
-              <h2 className="text-sm md:text-lg text-zinc-300">
+              <h2 className="text-[13px] md:text-lg text-zinc-300">
                 {edu.college}
               </h2>
               <p className="text-sm md:text-lg text-zinc-400">{edu.years}</p>
