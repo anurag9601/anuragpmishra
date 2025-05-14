@@ -1,20 +1,55 @@
 "use client";
 
+import { AppContext } from "@/context/appContext";
 import { signIn, signOut, useSession } from "next-auth/react";
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useContext, useState } from "react";
 import { AiFillGithub } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
 import { IoSend } from "react-icons/io5";
 import { PiSignOutBold } from "react-icons/pi";
 
 const SendMessage = () => {
-  const { status } = useSession();
+  const { data, status } = useSession();
+
+  const { setNotification } = useContext(AppContext);
 
   const [message, setMessage] = useState<string>("");
+
+  const [loading, setLoading] = useState<boolean>(false);
 
   function handleUserSignOut() {
     if (status === "authenticated") {
       signOut();
+    }
+  }
+
+  async function handleSendMessage() {
+    if (loading) return;
+
+    if (data && data.user) {
+      setLoading(true);
+      const user = data.user;
+
+      const request = await fetch("/api/message", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          userEmail: user.email,
+          message,
+        }),
+      });
+
+      const response = await request.json();
+
+      if (response.success === true) {
+        setMessage("");
+        setNotification(
+          `Thank you for sharing your thoughts with us! 💬 Your words mean a lot 😊✨`
+        );
+      } else if (response.error) {
+        setNotification(response.error);
+      }
+      setLoading(false);
     }
   }
 
@@ -39,7 +74,11 @@ const SendMessage = () => {
             <input
               type="text"
               placeholder="Please type your message here..."
-              className="w-full h-[35px] border-[1px] border-zinc-700 rounded-md outline-none px-[15px] text-[15px] focus:border-blue-400 duration-300"
+              className={`w-full h-[35px] border-[1px] border-zinc-700 rounded-md outline-none px-[15px] text-[15px] ${
+                loading === false ? "focus:border-blue-400" : "opacity-[.5]"
+              } duration-300`}
+              readOnly={loading === true}
+              value={message}
               onChange={(e: ChangeEvent<HTMLInputElement>) =>
                 setMessage(e.target.value)
               }
@@ -57,14 +96,22 @@ const SendMessage = () => {
               className={`h-[35px] w-[35px] rounded-md flex items-center justify-center ${
                 message.length == 0 ? "bg-zinc-800" : "bg-zinc-700"
               } ${
-                message.length === 0 ? "cursor-not-allowed" : "cursor-pointer"
+                message.length === 0 || loading === true
+                  ? "cursor-not-allowed"
+                  : "cursor-pointer"
               }`}
+              disabled={message.length === 0}
+              onClick={handleSendMessage}
             >
-              <IoSend
-                className={`text-lg ${
-                  message.length == 0 ? "text-zinc-500" : "text-zinc-100"
-                }`}
-              />
+              {loading === false ? (
+                <IoSend
+                  className={`text-lg ${
+                    message.length == 0 ? "text-zinc-500" : "text-zinc-100"
+                  }`}
+                />
+              ) : (
+                <div className="border-[3px] h-[20px] w-[20px] rounded-full border-t-blue-600 loading-spin"></div>
+              )}
             </button>
           </div>
         </div>

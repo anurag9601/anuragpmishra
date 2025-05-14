@@ -1,4 +1,3 @@
-import { handleSendQuestionEmail } from "@/services/sendEmail";
 import { NextRequest } from "next/server";
 import { connectQueueAndWorker } from "../../BullMQ/connectBullMQAndWorker";
 
