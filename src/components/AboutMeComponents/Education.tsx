@@ -24,7 +24,7 @@ const Education = () => {
             key={index}
           >
             <Image
-              src="/images/college-logo.png"
+              src="/images/college-logo.webp"
               alt="college-logo"
               height={100}  
               width={100}

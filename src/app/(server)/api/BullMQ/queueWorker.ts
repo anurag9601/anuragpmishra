@@ -4,6 +4,7 @@ import { appQueueName } from "./connectQueue";
 import { handleSendQuestionEmail } from "@/services/sendEmail";
 import UsersModel from "@/database/users.model";
 import MessagesModel from "@/database/messages.model";
+import redis from "@/services/redis";
 
 //Worker
 export function connectQueueWorker() {
@@ -64,7 +65,6 @@ export function connectQueueWorker() {
             };
 
             return true;
-
         }
     }, { connection: redisConnection });
 }

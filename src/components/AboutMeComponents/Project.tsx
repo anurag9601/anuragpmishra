@@ -28,7 +28,7 @@ const Project = () => {
       ],
       github: "https://github.com/anurag9601/health-quality",
       preview: "https://health-quality.vercel.app/",
-      imageURL: "/images/health-quality.png",
+      imageURL: "/images/health-quality.webp",
     },
     {
       name: "Instagram Chrome Extension",
@@ -46,7 +46,7 @@ const Project = () => {
         "CRXJS",
       ],
       github: "https://github.com/anurag9601/instagram-kid-extension",
-      imageURL: "/images/instagram-kid-extension.png",
+      imageURL: "/images/instagram-kid-extension.webp",
     },
     {
       name: "LeetCode Chrome Extension",
@@ -65,7 +65,7 @@ const Project = () => {
         "CRXJS",
       ],
       github: "https://github.com/anurag9601/leetcode-extension",
-      imageURL: "/images/leetcode-extension.png",
+      imageURL: "/images/leetcode-extension.webp",
     },
     {
       name: "AI Mailer",
@@ -84,7 +84,7 @@ const Project = () => {
         "CSS",
       ],
       github: "https://github.com/anurag9601/ai-mailer",
-      imageURL: "/images/ai-emailer.png",
+      imageURL: "/images/ai-emailer.webp",
     },
   ];
 

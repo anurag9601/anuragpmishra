@@ -46,7 +46,7 @@ const VoiceSetting = () => {
   return (
     <div className="fixed z-[9999] top-[12%] left-[20px] flex items-start gap-[10px]">
       <Image
-        src="/images/settings.png"
+        src="/images/settings.webp"
         alt="settings"
         height={40}
         width={40}

@@ -2,6 +2,7 @@
 
 import { AppContext } from "@/context/appContext";
 import { signIn, signOut, useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import React, { ChangeEvent, useContext, useState } from "react";
 import { AiFillGithub } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
@@ -16,6 +17,8 @@ const SendMessage = () => {
   const [message, setMessage] = useState<string>("");
 
   const [loading, setLoading] = useState<boolean>(false);
+
+  const router = useRouter();
 
   function handleUserSignOut() {
     if (status === "authenticated") {
@@ -46,6 +49,7 @@ const SendMessage = () => {
         setNotification(
           `Thank you for sharing your thoughts with us! 💬 Your words mean a lot 😊✨`
         );
+        router.refresh();
       } else if (response.error) {
         setNotification(response.error);
       }
@@ -54,7 +58,7 @@ const SendMessage = () => {
   }
 
   return (
-    <div className="w-full h-fit my-[30px]">
+    <div className="w-full max-h-[75px] h-full my-[30px]">
       {status === "loading" && (
         <div className="w-fit flex flex-col gap-[10px] loading-animation">
           <button
