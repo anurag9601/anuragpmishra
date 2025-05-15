@@ -68,7 +68,8 @@ const Messages: React.FC<MessagesProps> = async ({ allMessages, error }) => {
                   <span>{message.userData.userName}</span>
                   <GoDotFill className="text-[10px]" />{" "}
                   <span>
-                    {moment(message.createdAt).format("D MMMM YYYY")} at {moment(message.createdAt).format("h:mm a")}
+                    {moment(message.createdAt).format("D MMMM YYYY")} at{" "}
+                    {moment(message.createdAt).format("h:mm a")}
                   </span>
                 </p>
                 <p className="text-[15px] text-zinc-100">{message.message}</p>
@@ -91,7 +92,10 @@ const Messages: React.FC<MessagesProps> = async ({ allMessages, error }) => {
                 <p className="flex flex-wrap items-center gap-[5px] text-[13px] text-zinc-400">
                   <span>{message.userData.userName}</span>
                   <GoDotFill className="text-[10px]" />{" "}
-                  <span>13 may 2025 at 12:40 PM</span>
+                  <span>
+                    {moment(message.createdAt).format("D MMMM YYYY")} at{" "}
+                    {moment(message.createdAt).format("h:mm a")}
+                  </span>
                 </p>
                 <p className="text-[15px] text-zinc-100">{message.message}</p>
               </div>

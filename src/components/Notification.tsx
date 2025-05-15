@@ -13,7 +13,7 @@ const Notification = () => {
         clearTimeout(timeOut);
       }, 5000);
     }
-  }, [notification]);
+  }, [notification, setNotification]);
 
   return (
     <>

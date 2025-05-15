@@ -9,8 +9,6 @@ const AIHomeAnimation = () => {
 
   const iframeContanerRef = useRef<HTMLDivElement | null>(null);
 
-  const [animationStart, setAnimationStart] = useState<boolean>(false);
-
   const [mouseCordinate, setMouseCordinate] = useState<{
     [key: string]: number;
   }>({

@@ -1,9 +1,9 @@
 "use client";
 
+import { AppContext } from "@/context/appContext";
 import { ConnectionContext } from "@/context/ConnectionContext";
 import React, {
   ChangeEvent,
-  DragEventHandler,
   useContext,
   useRef,
   useState,
@@ -14,6 +14,7 @@ import { IoCode } from "react-icons/io5";
 import { LuFile, LuUpload } from "react-icons/lu";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { RxCross2 } from "react-icons/rx";
+import { z } from "zod";
 
 const ProjectDetailsUploadForm = () => {
   const {
@@ -25,7 +26,11 @@ const ProjectDetailsUploadForm = () => {
     connectUserAllInfo,
   } = useContext(ConnectionContext);
 
+  const { setNotification } = useContext(AppContext);
+
   const [isDragIn, setIsDragIn] = useState<boolean>(false);
+
+  const [loading, setLoading] = useState<boolean>(false);
 
   const dragenter = useRef<number>(0);
 
@@ -47,7 +52,7 @@ const ProjectDetailsUploadForm = () => {
 
   const handleTextareaOnChange = (
     e: ChangeEvent<HTMLTextAreaElement>,
-    inputParamName: "techinalRequirements" | "projectDetails"
+    inputParamName: "technicalRequirements" | "projectDetails"
   ) => {
     const value = e.target.value;
     setConnectUserAllInfo((prev) => {
@@ -85,6 +90,62 @@ const ProjectDetailsUploadForm = () => {
     }
   }
 
+  async function handleSendEnquiry() {
+    if (loading) return;
+
+    const verifyData = {
+      technicalRequirements: connectUserAllInfo.technicalRequirements,
+      projectDetails: connectUserAllInfo.technicalRequirements,
+    };
+
+    const zodValidDataCheckObject = z.object({
+      technicalRequirements: z.string().min(3),
+      projectDetails: z.string().min(3),
+    });
+
+    const verify = zodValidDataCheckObject.safeParse(verifyData);
+
+    if (verify.success === true) {
+      setLoading(true);
+      const data = new FormData();
+      data.append("userName", connectUserAllInfo.userName);
+      data.append("email", connectUserAllInfo.email);
+      data.append("companyName", connectUserAllInfo.companyName);
+      data.append("projectType", connectUserAllInfo.projectType);
+      data.append("budgetRange", connectUserAllInfo.budgetRange);
+      data.append("timelinePerference", connectUserAllInfo.timelinePerference);
+      data.append("teamSize", connectUserAllInfo.teamSize);
+      data.append(
+        "technicalRequirements",
+        connectUserAllInfo.technicalRequirements
+      );
+      data.append("projectDetails", connectUserAllInfo.projectDetails);
+
+      for (let i = 0; i < projectFiles.length; i++) {
+        data.append(`file-${i + 1}`, projectFiles[i]);
+      }
+
+      const request = await fetch("/api/mail/enquiry", {
+        method: "POST",
+        body: data,
+      });
+
+      const response = await request.json();
+
+      if (response.success === true) {
+        setNotification(
+          `Thank you so much for trusting me with your project! 🙌 
+          I'm truly excited to work with you and give it my best. 🚀`
+        );
+      } else if (response.error) {
+        setNotification(response.error);
+      }
+
+      setConnectWindowOpen(false);
+      setLoading(false);
+    }
+  }
+
   return (
     <div className="flex-1 flex flex-col px-[30px] py-[30px] gap-[20px] bg-zinc-900 rounded-lg">
       <div className=" w-full flex items-center justify-between">
@@ -104,8 +165,8 @@ const ProjectDetailsUploadForm = () => {
           <textarea
             className="min-h-[120px] w-full bg-zinc-800 rounded-lg px-[15px] py-[10px] text-[16px] text-zinc-50 outline-none border-[1.5px] border-zinc-500 focus:border-blue-500"
             placeholder="Any specific technologies, frameworks, or requirement"
-            value={connectUserAllInfo.techinalRequirements}
-            onChange={(e) => handleTextareaOnChange(e, "techinalRequirements")}
+            value={connectUserAllInfo.technicalRequirements}
+            onChange={(e) => handleTextareaOnChange(e, "technicalRequirements")}
           />
         </div>
         <div className="flex flex-col gap-[8px]">
@@ -138,7 +199,9 @@ const ProjectDetailsUploadForm = () => {
             <p className="text-[15px] text-zinc-400">
               Click to upload file or drag and drop
             </p>
-            <p className="text-[11px] text-zinc-500">Maximum file size: 10MB</p>
+            <p className="text-[11px] text-zinc-500">
+              PDF File only & Maximum file size: 10MB
+            </p>
             <input
               type="file"
               multiple
@@ -174,8 +237,17 @@ const ProjectDetailsUploadForm = () => {
           >
             Back
           </button>
-          <button className="bg-blue-600 text-zinc-50 px-[20px] py-[7px] rounded-lg text-md cursor-pointer hover:bg-blue-700">
-            Send Enquiry
+          <button
+            className={`h-[37px] w-[150px] bg-blue-600 text-zinc-50 px-[20px] py-[7px] rounded-lg text-md ${
+              loading == false && "cursor-pointer"
+            } hover:bg-blue-700 flex items-center justify-center`}
+            onClick={handleSendEnquiry}
+          >
+            {loading === false ? (
+              "Send Enquiry"
+            ) : (
+              <div className="border-[3px] h-[25px] w-[25px] rounded-full border-t-blue-600 loading-spin"></div>
+            )}
           </button>
         </div>
       </div>

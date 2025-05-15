@@ -141,11 +141,10 @@ const UserQuery = () => {
                   }
                 };
 
-                recognition.onerror = function (event: any) {
+                recognition.onerror = function () {
                   alert(
-                    "⚠️ Maybe your browser doesn’t support this feature. 🌐 Try using Google Chrome it usually works smoothly! ✅🚀"
+                    "⚠️ Maybe your browser doesn't support this feature. 🌐 Try using Google Chrome it usually works smoothly! ✅🚀"
                   );
-                  console.log(event.error);
                 };
 
                 recognition.start();

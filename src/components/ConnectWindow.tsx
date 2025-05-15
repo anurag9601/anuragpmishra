@@ -4,7 +4,6 @@ import Options from "./ConnectWindowComponents/Options";
 import { ConnectionContext } from "@/context/ConnectionContext";
 import UserInfoForm from "./ConnectWindowComponents/UserInfoForm";
 import DetailsForm from "./ConnectWindowComponents/DetailsForm";
-import ProjectDetailsUploadForm from "./ConnectWindowComponents/ProjectDetailsUploadForm";
 
 const ConnectWindow: React.FC = () => {
   const { selectedTab, setConnectWindowOpen, connectionDetailsWindowOpen } =
@@ -27,7 +26,7 @@ const ConnectWindow: React.FC = () => {
     return () => {
       document.removeEventListener("mousedown", handleUserClick);
     };
-  }, []);
+  }, [handleUserClick]);
 
   return (
     <div className="fixed inset-0 z-[999] bg-[rgba(0,0,0,.8)] overflow-y-auto">

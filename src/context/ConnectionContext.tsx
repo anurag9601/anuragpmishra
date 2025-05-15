@@ -18,9 +18,9 @@ type connectUserAllInfoDataType = {
   yourQuestion: string;
   projectType: string;
   budgetRange: string;
-  timelinePereference: string;
+  timelinePerference: string;
   teamSize: string;
-  techinalRequirements: string;
+  technicalRequirements: string;
   projectDetails: string;
 };
 
@@ -56,9 +56,9 @@ export const ConnectionContext = createContext<ConnectionContextDataType>({
     yourQuestion: "",
     projectType: "",
     budgetRange: "",
-    timelinePereference: "",
+    timelinePerference: "",
     teamSize: "",
-    techinalRequirements: "",
+    technicalRequirements: "",
     projectDetails: "",
   },
   setConnectUserAllInfo: () => {},
@@ -87,9 +87,9 @@ function ConnectionContextProvider({ children }: { children: ReactNode }) {
       yourQuestion: "",
       projectType: "Web Application",
       budgetRange: "₹5L - ₹10L",
-      timelinePereference: "3-6 Months",
+      timelinePerference: "3-6 Months",
       teamSize: "",
-      techinalRequirements: "",
+      technicalRequirements: "",
       projectDetails: "",
     });
 

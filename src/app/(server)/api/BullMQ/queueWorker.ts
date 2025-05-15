@@ -1,10 +1,9 @@
 import { Job, Worker } from "bullmq";
 import { redisConnection } from "./queue";
 import { appQueueName } from "./connectQueue";
-import { handleSendQuestionEmail } from "@/services/sendEmail";
+import { handleSendProjectEnquiryEmail, handleSendQuestionEmail } from "@/services/sendEmail";
 import UsersModel from "@/database/users.model";
 import MessagesModel from "@/database/messages.model";
-import redis from "@/services/redis";
 
 //Worker
 export function connectQueueWorker() {
@@ -20,6 +19,28 @@ export function connectQueueWorker() {
                 data.urgencyLevel,
                 data.preferredResponseTime,
                 data.yourQuestion);
+
+            if (messageId) {
+                return true;
+            }
+
+            return false;
+        }
+
+        if (job.name === "send-project-enquiry") {
+            const { userData, files } = job.data;
+
+            const messageId = await handleSendProjectEnquiryEmail(
+                userData.userName,
+                userData.email,
+                userData.companyName,
+                userData.projectType,
+                userData.budgetRange,
+                userData.timelinePerference,
+                userData.teamSize,
+                userData.technicalRequirements,
+                userData.projectDetails,
+                files);
 
             if (messageId) {
                 return true;
@@ -47,7 +68,7 @@ export function connectQueueWorker() {
         if (job.name === "set-user-message") {
             const { userEmail, message } = job.data;
 
-            let user = await UsersModel.findOne({ userEmail });
+            const user = await UsersModel.findOne({ userEmail });
 
             if (!user) {
                 return false;
@@ -66,6 +87,7 @@ export function connectQueueWorker() {
 
             return true;
         }
+
     }, { connection: redisConnection });
 }
 

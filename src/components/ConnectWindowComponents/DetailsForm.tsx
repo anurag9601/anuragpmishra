@@ -35,7 +35,7 @@ const DetailsForm = () => {
       | "urgencyLevel"
       | "projectType"
       | "budgetRange"
-      | "timelinePereference"
+      | "timelinePerference"
       | "preferredResponseTime"
       | "yourQuestion"
       | "teamSize"
@@ -90,8 +90,8 @@ const DetailsForm = () => {
       if (response.success === true) {
         setNotification(`🎉 Your message has been sent!
         Thank you for reaching out 💌
-        I’ve received your question and will get back to you as soon as possible.
-        In the meantime, grab a coffee ☕ and relax I’ve got this! 😊`);
+        I've received your question and will get back to you as soon as possible.
+        In the meantime, grab a coffee ☕ and relax I've got this! 😊`);
       } else if (response.error) {
         setNotification(response.error);
       }
@@ -104,14 +104,14 @@ const DetailsForm = () => {
     const zodValidationCheckOfSendingData = z.object({
       projectType: z.string(),
       budgetRange: z.string(),
-      timelinePereference: z.string(),
+      timelinePerference: z.string(),
       teamSize: z.string().min(1),
     });
 
     const data = {
       projectType: connectUserAllInfo.projectType,
       budgetRange: connectUserAllInfo.budgetRange,
-      timelinePereference: connectUserAllInfo.timelinePereference,
+      timelinePerference: connectUserAllInfo.timelinePerference,
       teamSize: connectUserAllInfo.teamSize,
     };
 
@@ -251,9 +251,9 @@ const DetailsForm = () => {
                   </p>
                   <select
                     className="h-[50px] w-full bg-zinc-800 rounded-lg px-[15px] text-[16px] text-zinc-50 outline-none border-[1.5px] border-zinc-500 focus:border-blue-500 cursor-pointer"
-                    value={connectUserAllInfo.timelinePereference}
+                    value={connectUserAllInfo.timelinePerference}
                     onChange={(e) =>
-                      handleSelectionInputChange(e, "timelinePereference")
+                      handleSelectionInputChange(e, "timelinePerference")
                     }
                   >
                     <option value="1-3 Months">1-3 Months</option>

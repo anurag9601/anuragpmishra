@@ -35,7 +35,7 @@ const AuthenticationWindow = () => {
       </div>
       <p className="fixed z-[99] bottom-[20px] px-[10%] text-[12px] md:text-[15px] text-center bg-gradient-to-r from-teal-400 via-blue-500 to-violet-400 bg-clip-text text-transparent">
         Sign in to your AI powered assistant to learn more about me and
-        everything else it's going to be an amazing experience!
+        everything else it&apos;s going to be an amazing experience!
       </p>
     </div>
   );
