@@ -14,7 +14,7 @@ const AppNav = () => {
         onClick={() => router.push("/")}
       >
         <Image
-          src="/images/my-image.png"
+          src="/images/my-image.webp"
           alt="my-image"
           height={30}
           width={30}
@@ -22,7 +22,10 @@ const AppNav = () => {
         />
         <p>Anurag Mishra</p>
       </div>
-      <div className="py-[5px] px-[10px] hover:bg-neutral-800 rounded-lg cursor-pointer ease-out duration-200" onClick={() => router.push("/ask-ai")}>
+      <div
+        className="py-[5px] px-[10px] hover:bg-neutral-800 rounded-lg cursor-pointer ease-out duration-200"
+        onClick={() => router.push("/ask-ai")}
+      >
         Ask me
       </div>
       <div
