@@ -1,18 +1,23 @@
 import Messages from "@/components/GuestBookComponents/Messages";
 import SendMessage from "@/components/GuestBookComponents/SendMessage";
+import { auth } from "@/lib/auth";
 import Image from "next/image";
 import React from "react";
 
 async function fetData() {
-  const baseURL = process.env.NEXT_PUBLIC_SITE_URL as string;
-  const request = await fetch(`${baseURL}/api/message/all`);
+  const session = await auth();
 
-  const response = await request.json();
+  if (session?.user) {
+    const baseURL = process.env.NEXT_PUBLIC_SITE_URL as string;
+    const request = await fetch(`${baseURL}/api/message/all`);
 
-  if (response.success === true) {
-    return { allMessages: response.allMessages };
-  } else if (response.error) {
-    return { error: response.error };
+    const response = await request.json();
+
+    if (response.success === true) {
+      return { allMessages: response.allMessages };
+    } else if (response.error) {
+      return { error: response.error };
+    }
   }
 }
 

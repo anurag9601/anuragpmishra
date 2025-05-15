@@ -3,6 +3,7 @@ import { getResponseFromGemini } from "@/services/llm";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { voiceData } from "../../../public/data/voiceData";
 
+
 const UserQuery = () => {
   const {
     setSpeaking,
@@ -34,6 +35,7 @@ const UserQuery = () => {
         .then((permissionStatus) => {
           if (permissionStatus.state === "granted") {
             setUserSpeaking(true);
+            // eslint-disable-next-line no-console
             const SpeechRecognition =
               (window as any).SpeechRecognition ||
               (window as any).webkitSpeechRecognition;
@@ -55,6 +57,7 @@ const UserQuery = () => {
               spoken = false;
             };
 
+            // eslint-disable-next-line no-console
             recognition.onresult = async function (event: any) {
               const transcript = event.results[0][0].transcript;
               spoken = true;
@@ -80,11 +83,10 @@ const UserQuery = () => {
               }
             };
 
-            recognition.onerror = function (event: any) {
+            recognition.onerror = function () {
               alert(
                 "⚠️ Maybe your browser doesn’t support this feature. 🌐 Try using Google Chrome it usually works smoothly! ✅🚀"
               );
-              console.log(event.error);
             };
 
             recognition.start();
@@ -93,6 +95,7 @@ const UserQuery = () => {
               .getUserMedia({ audio: true })
               .then(() => {
                 setUserSpeaking(true);
+                // eslint-disable-next-line no-console
                 const SpeechRecognition =
                   (window as any).SpeechRecognition ||
                   (window as any).webkitSpeechRecognition;
@@ -113,7 +116,7 @@ const UserQuery = () => {
                 recognition.onstart = function () {
                   spoken = false;
                 };
-
+                // eslint-disable-next-line no-console
                 recognition.onresult = async function (event: any) {
                   const transcript = event.results[0][0].transcript;
                   spoken = true;

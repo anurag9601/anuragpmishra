@@ -1,5 +1,5 @@
 "use client";
-import React, { useContext, useEffect, useRef } from "react";
+import React, { useCallback, useContext, useEffect, useRef } from "react";
 import Options from "./ConnectWindowComponents/Options";
 import { ConnectionContext } from "@/context/ConnectionContext";
 import UserInfoForm from "./ConnectWindowComponents/UserInfoForm";
@@ -11,18 +11,20 @@ const ConnectWindow: React.FC = () => {
 
   const contentContainerRef = useRef<HTMLDivElement | null>(null);
 
-  function handleUserClick(e: MouseEvent) {
-    if (
-      contentContainerRef.current &&
-      !contentContainerRef.current.contains(e.target as Node)
-    ) {
-      setConnectWindowOpen(false);
-    }
-  }
+  const handleUserClick = useCallback(
+    (e: MouseEvent) => {
+      if (
+        contentContainerRef.current &&
+        !contentContainerRef.current.contains(e.target as Node)
+      ) {
+        setConnectWindowOpen(false);
+      }
+    },
+    [setConnectWindowOpen]
+  );
 
   useEffect(() => {
     document.addEventListener("mousedown", handleUserClick);
-
     return () => {
       document.removeEventListener("mousedown", handleUserClick);
     };

@@ -2,7 +2,7 @@ import { AskAIContext } from "@/context/AskAIContext";
 import React, { useContext, useEffect, useRef, useState } from "react";
 
 const AIRes = () => {
-  const { setSpeaking, AIRes, setAIRes, selectedVoice, selectedLanguage } =
+  const { setSpeaking, AIRes, setAIRes, selectedVoice } =
     useContext(AskAIContext);
 
   const hasSpokenRef = useRef<boolean>(false);
@@ -53,7 +53,7 @@ const AIRes = () => {
   }
 
   function splitTextIntoChunks(text: string, maxLength: number = 100) {
-    let words: string[] = text.split(/[.!?।,\\]+/);
+    const words: string[] = text.split(/[.!?।,\\]+/);
 
     const chunks: string[] = [];
 
