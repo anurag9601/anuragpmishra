@@ -116,7 +116,7 @@ const Project = () => {
                   {project.keypoints.map((point, index) => {
                     return (
                       <li
-                        className="flex items-start gap-[5px] text-zinc-300 text-[15px] md:text-[17px]"
+                        className="flex items-start gap-[5px] text-zinc-300 text-[15px] md:text-[17px] text-justify"
                         key={index}
                       >
                         <GoDotFill className="text-3xl text-zinc-500" />

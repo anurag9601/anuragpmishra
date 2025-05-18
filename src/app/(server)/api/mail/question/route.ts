@@ -12,7 +12,7 @@ export async function POST(req: NextRequest) {
             preferredResponseTime,
             yourQuestion } = await req.json();
 
-        await appQueue.add("send-user-question", {
+        appQueue.add("send-user-question", {
             userName,
             email,
             questionCategory,

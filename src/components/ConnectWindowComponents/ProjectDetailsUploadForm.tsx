@@ -160,7 +160,7 @@ const ProjectDetailsUploadForm = () => {
       <div className="flex flex-col gap-[20px]">
         <div className="flex flex-col gap-[8px]">
           <p className="text-zinc-200 flex items-center gap-[10px] font-[600]">
-            <IoCode className="text-xl" /> Techinal Requirements
+            <IoCode className="text-xl" /> Technical Requirements
           </p>
           <textarea
             className="min-h-[120px] w-full bg-zinc-800 rounded-lg px-[15px] py-[10px] text-[16px] text-zinc-50 outline-none border-[1.5px] border-zinc-500 focus:border-blue-500"

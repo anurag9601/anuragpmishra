@@ -7,7 +7,7 @@ const AboutMe = () => {
   return (
     <div className="h-full w-full text-zinc-50 py-[70px] flex-1 font-app aboutMe-animation lg:overflow-y-auto lg:px-[10%]">
       <h1 className="text-3xl font-[700] text-zinc-50">About Me</h1>
-      <p className="my-[20px] text-zinc-300">
+      <p className="my-[20px] text-zinc-300 text-justify">
         I&apos;m Anurag Mishra, a Full Stack Developer with a strong foundation in
         both frontend and backend technologies. I specialize in building
         scalable web applications using modern stacks like React.js, Next.js,

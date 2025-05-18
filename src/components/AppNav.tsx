@@ -22,18 +22,18 @@ const AppNav = () => {
         />
         <p>Anurag Mishra</p>
       </div>
-      <div
+      <button
         className="py-[5px] px-[10px] hover:bg-neutral-800 rounded-lg cursor-pointer ease-out duration-200"
         onClick={() => router.push("/ask-ai")}
       >
         Ask me
-      </div>
-      <div
+      </button>
+      <button
         className="py-[5px] px-[10px] hover:bg-neutral-800 rounded-lg cursor-pointer ease-out duration-200"
         onClick={() => router.push("/guest-book")}
       >
         Guest Book
-      </div>
+      </button>
     </div>
   );
 };

@@ -54,10 +54,13 @@ export async function handleSendQuestionEmail(
     }
 }
 
-interface EnquiryFile {
+interface RawEnquiryFile {
     name: string;
     type: string;
-    content: Buffer;
+    content: {
+        type: 'Buffer';
+        data: number[];
+    };
 }
 
 export async function handleSendProjectEnquiryEmail(
@@ -70,7 +73,7 @@ export async function handleSendProjectEnquiryEmail(
     teamSize: string,
     technicalRequirements: string,
     projectDetails: string,
-    files: EnquiryFile[]
+    files: RawEnquiryFile[]
 ) {
     try {
         const transporter = nodemailer.createTransport({
@@ -85,7 +88,9 @@ export async function handleSendProjectEnquiryEmail(
 
         const attachments = files.map((file) => ({
             filename: file.name,
-            content: file.content,
+            content: Buffer.isBuffer(file.content)
+                ? file.content
+                : Buffer.from((file.content as any).data),
             contentType: file.type || "application/octet-stream",
         }));
 

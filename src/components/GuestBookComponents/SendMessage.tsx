@@ -72,9 +72,18 @@ const SendMessage = () => {
         </div>
       )}
       {status === "authenticated" && (
-        <div className="flex items-center justify-between gap-[10px] max-w-[600px] w-full">
-          <div className="flex-1 flex flex-col gap-[8px]">
+        <div className="flex flex-col gap-[10px] max-w-[600px] w-full">
+          <div className="flex-1 flex items-center justify-between gap-[8px]">
             <p className="text-[13px] font-[700] text-zinc-300">Your message</p>
+            <p
+              className="text-[13px] font-[400] text-zinc-300 flex items-center gap-[5px] group cursor-pointer"
+              onClick={handleUserSignOut}
+            >
+              <PiSignOutBold />{" "}
+              <span className="group-hover:underline">Sign out</span>
+            </p>
+          </div>
+          <div className="flex items-center gap-[8px]">
             <input
               type="text"
               placeholder="Please type your message here..."
@@ -87,17 +96,8 @@ const SendMessage = () => {
                 setMessage(e.target.value)
               }
             />
-          </div>
-          <div className="flex flex-col gap-[8px]">
-            <p
-              className="text-[13px] font-[400] text-zinc-300 flex items-center gap-[5px] group cursor-pointer"
-              onClick={handleUserSignOut}
-            >
-              <PiSignOutBold />{" "}
-              <span className="group-hover:underline">Sign out</span>
-            </p>
             <button
-              className={`h-[35px] w-[35px] rounded-md flex items-center justify-center ${
+              className={`h-[35px] min-w-[35px] rounded-md flex items-center justify-center ${
                 message.length == 0 ? "bg-zinc-800" : "bg-zinc-700"
               } ${
                 message.length === 0 || loading === true
