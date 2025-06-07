@@ -48,17 +48,17 @@ const NameSocial: React.FC = () => {
         >
           <FaFileDownload /> Resume
         </button>
-        <div className="flex items-center justify-center gap-[10px]">
+        <div className="flex items-center justify-center gap-[25px]">
           <AiFillGithub
-            className="text-xl text-zinc-400 cursor-pointer hover:text-zinc-100"
+            className="text-[24px] text-zinc-400 cursor-pointer hover:text-zinc-100"
             onClick={() => router.push("https://github.com/anurag9601")}
           />
           <IoMail
-            className="text-xl text-zinc-400 cursor-pointer hover:text-zinc-100"
+            className="text-[24px] text-zinc-400 cursor-pointer hover:text-zinc-100"
             onClick={() => router.push("mailto:anuragmishrap13@gmail.com")}
           />
           <IoLogoLinkedin
-            className="text-xl text-zinc-400 cursor-pointer hover:text-zinc-100"
+            className="text-[24px] text-zinc-400 cursor-pointer hover:text-zinc-100"
             onClick={() =>
               router.push(
                 "https://www.linkedin.com/in/anurag-mishra-7a93b6284/"

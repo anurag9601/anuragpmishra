@@ -3,22 +3,7 @@ import SendMessage from "@/components/GuestBookComponents/SendMessage";
 import Image from "next/image";
 import React from "react";
 
-async function fetData() {
-
-  const baseURL = process.env.NEXT_PUBLIC_SITE_URL as string;
-  const request = await fetch(`${baseURL}/api/message/all`);
-
-  const response = await request.json();
-
-  if (response.success === true) {
-    return { allMessages: response.allMessages };
-  } else if (response.error) {
-    return { error: response.error };
-  }
-}
-
 const GuestBook = async () => {
-  const data = await fetData();
 
   return (
     <div className="h-screen w-screen bg-neutral-950 overflow-x-hidden overflow-y-auto flex flex-col px-[10%] py-[70px] font-app text-zinc-100">
@@ -32,7 +17,7 @@ const GuestBook = async () => {
         </h1>
       </div>
       <SendMessage />
-      <Messages allMessages={data?.allMessages} error={data?.error} />
+      <Messages />
     </div>
   );
 };

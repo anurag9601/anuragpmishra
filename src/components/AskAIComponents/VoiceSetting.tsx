@@ -2,10 +2,20 @@
 
 import { AskAIContext } from "@/context/AskAIContext";
 import Image from "next/image";
-import React, { ChangeEvent, useContext, useState } from "react";
+import React, {
+  ChangeEvent,
+  Dispatch,
+  SetStateAction,
+  useContext,
+} from "react";
 import { voiceData } from "../../../public/data/voiceData";
 
-const VoiceSetting = () => {
+interface Props {
+  settingsOpen: boolean;
+  setSettingsOpen: Dispatch<SetStateAction<boolean>>;
+}
+
+const VoiceSetting = ({ setSettingsOpen, settingsOpen }: Props) => {
   const {
     selectedVoice,
     setSelectedVoice,
@@ -14,8 +24,6 @@ const VoiceSetting = () => {
   } = useContext(AskAIContext);
 
   const voices = window.speechSynthesis.getVoices();
-
-  const [settingsOpen, setSettingsOpen] = useState<boolean>(false);
 
   function handleSelectVoiceOnChange(e: ChangeEvent<HTMLSelectElement>) {
     const selectedIndex = e.target.selectedIndex;
@@ -51,10 +59,20 @@ const VoiceSetting = () => {
         height={40}
         width={40}
         className="h-[30px] w-[30px] md:h-[40px] md:w-[40px]"
-        onClick={() => setSettingsOpen((prev) => !prev)}
+        onClick={(e) => {
+          e.stopPropagation();
+          e.preventDefault();
+          setSettingsOpen((prev) => !prev);
+        }}
       />
       {settingsOpen && (
-        <div className="flex items-center gap-[5px] p-[10px] bg-zinc-800 rounded-md setting-left-slide">
+        <div
+          className="flex items-center gap-[5px] p-[10px] bg-zinc-800 rounded-md setting-left-slide"
+          onClick={(e) => {
+            e.stopPropagation();
+            e.preventDefault();
+          }}
+        >
           <div className="flex flex-col gap-[5px]">
             <p className="text-[10px] font-[600] ml-[5px]">AI Voice</p>
             <select
